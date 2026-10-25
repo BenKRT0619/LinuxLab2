@@ -1,0 +1,40 @@
+# Kernel module build artifacts
+driver/*.o
+driver/*.ko.cmd
+driver/*.mod
+driver/*.mod.c
+driver/*.mod.o
+driver/*.mod.o.cmd
+driver/*.order
+driver/Module.symvers
+
+# Hidden kernel build artifacts
+driver/.*.cmd
+
+# Keep final kernel module
+!driver/lab2_driver.ko
+
+# Keep the built module integrated into the initramfs
+!rootfs/initramfs/lib/modules/
+!rootfs/initramfs/lib/modules/5.15.0/
+!rootfs/initramfs/lib/modules/5.15.0/lab2_driver.ko
+
+# Keep final initramfs package
+!output/
+!output/initramfs_lab2.cpio.gz
+
+# Temporary / generated files
+*.tmp
+*.log
+*.swp
+*~
+.DS_Store
+
+# Runtime / temporary MTD data
+mtd/*.bin
+mtd/*.img
+mtd/*.jffs2
+
+# QEMU runtime files
+*.pid
+*.socket
