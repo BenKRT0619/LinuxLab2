@@ -1,13 +1,5 @@
 # Embedded Linux Lab 2
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Architecture-ARMv7-blue?style=for-the-badge" alt="ARMv7">
-  <img src="https://img.shields.io/badge/Linux-5.15-orange?style=for-the-badge" alt="Linux 5.15">
-  <img src="https://img.shields.io/badge/QEMU-VExpress--A9-green?style=for-the-badge" alt="QEMU VExpress-A9">
-  <img src="https://img.shields.io/badge/Character--Device-Driver-purple?style=for-the-badge" alt="Character Device Driver">
-  <img src="https://img.shields.io/badge/ProcFS%20%2F%20SysFS-Validated-red?style=for-the-badge" alt="ProcFS SysFS">
-  <img src="https://img.shields.io/badge/JFFS2%20%2F%20MTD-Tested-yellow?style=for-the-badge" alt="JFFS2 MTD">
-</p>
 
 <p align="center">
   <b>Embedded Linux Lab 2 — Character Device Driver, ProcFS, SysFS, Initramfs, MTD and JFFS2</b>
@@ -37,50 +29,8 @@ The complete system is cross-compiled on Ubuntu and executed on an ARMv7 Cortex-
 
 ---
 
-## 2. Lab Environment
 
-| Component           | Configuration             |
-| ------------------- | ------------------------- |
-| Host OS             | Ubuntu 26.04 LTS 64-bit   |
-| Target Architecture | ARMv7                     |
-| CPU                 | ARM Cortex-A9             |
-| Kernel              | Linux 5.15                |
-| Machine             | QEMU VExpress-A9          |
-| RAM                 | 512 MB                    |
-| SMP                 | 2 CPUs                    |
-| Cross Compiler      | `arm-linux-gnueabihf-gcc` |
-| Root Filesystem     | BusyBox Initramfs         |
-| Character Device    | `/dev/lab2`               |
-| Major Number        | 240                       |
-| Buffer Size         | 1024 bytes                |
-| Filesystem          | JFFS2                     |
-| Flash Interface     | MTD / NAND Simulator      |
-
----
-
-## 3. Project Objectives
-
-The main objectives of this laboratory are:
-
-1. Implement a Linux character device driver.
-2. Register and create `/dev/lab2`.
-3. Implement `open()`, `read()`, `write()` and `release()`.
-4. Maintain driver runtime statistics.
-5. Protect shared driver state using a mutex.
-6. Expose driver information through ProcFS.
-7. Expose runtime attributes through SysFS.
-8. Integrate the driver into the Initramfs root filesystem.
-9. Automatically load the driver during system boot.
-10. Execute and validate the driver inside QEMU.
-11. Simulate NAND flash using `nandsim`.
-12. Access the simulated flash through the MTD subsystem.
-13. Mount and validate a JFFS2 filesystem.
-14. Perform a raw NAND dump and verify NAND/OOB information.
-15. Preserve reproducible logs for all major validation stages.
-
----
-
-## 4. Repository Structure
+## 2. Repository Structure
 
 ```text
 embedded-linux-lab2/
@@ -127,7 +77,7 @@ embedded-linux-lab2/
 
 ---
 
-## 5. System Architecture
+## 3. System Architecture
 
 ```mermaid
 flowchart TB
@@ -165,7 +115,7 @@ flowchart TB
 
 ---
 
-## 6. Driver Architecture
+## 4. Driver Architecture
 
 The LAB-02 driver provides a character-device interface between userspace applications and kernel-space driver logic.
 
@@ -193,7 +143,7 @@ flowchart LR
 
 ---
 
-## 7. Character Device Driver
+## 5. Character Device Driver
 
 The driver registers the following character device:
 
@@ -227,7 +177,7 @@ A mutex is used to protect shared driver state during concurrent access.
 
 ---
 
-## 8. ProcFS Interface
+## 6. ProcFS Interface
 
 The driver creates:
 
@@ -261,7 +211,7 @@ Last data     : [Message_3]
 
 ---
 
-## 9. SysFS Interface
+## 7. SysFS Interface
 
 The driver creates a SysFS class and device:
 
@@ -287,7 +237,7 @@ last_data=Message_3
 
 ---
 
-## 10. Driver Build
+## 8. Driver Build
 
 The driver is cross-compiled against the Linux 5.15 kernel.
 
@@ -322,7 +272,7 @@ The final module is an ARM EABI5 kernel module built for Linux 5.15.
 
 ---
 
-## 11. Initramfs Integration
+## 9. Initramfs Integration
 
 The kernel module is integrated into:
 
@@ -350,7 +300,7 @@ The startup script automatically loads the driver and creates the device node.
 
 ---
 
-## 12. Boot Workflow
+## 10. Boot Workflow
 
 ```mermaid
 flowchart LR
@@ -378,7 +328,7 @@ flowchart LR
 
 ---
 
-## 13. QEMU ARMv7 Environment
+## 11. QEMU ARMv7 Environment
 
 The target system is executed using:
 
@@ -408,7 +358,7 @@ Linux 5.15
 
 ---
 
-## 14. Device Node Verification
+## 12. Device Node Verification
 
 After boot, the driver creates:
 
@@ -437,7 +387,7 @@ mknod /dev/lab2 c 240 0
 
 ---
 
-## 15. Character Device Functional Test
+## 13. Character Device Functional Test
 
 The driver test script performs:
 
@@ -494,7 +444,7 @@ Result:
 
 ---
 
-## 16. ProcFS and SysFS Validation
+## 14. ProcFS and SysFS Validation
 
 The ProcFS and SysFS test verifies that driver state is correctly exposed to userspace.
 
@@ -544,7 +494,7 @@ Result:
 
 ---
 
-## 17. NAND Simulator and MTD
+## 15. NAND Simulator and MTD
 
 The host-side NAND simulation uses the Linux NAND simulator:
 
@@ -575,7 +525,7 @@ The block device used for filesystem testing is:
 
 ---
 
-## 18. JFFS2 Filesystem Test
+## 16. JFFS2 Filesystem Test
 
 The simulated NAND partition is mounted using JFFS2:
 
@@ -625,7 +575,7 @@ Result:
 
 ---
 
-## 19. NAND Dump Verification
+## 17. NAND Dump Verification
 
 A raw NAND dump was performed using:
 
@@ -718,7 +668,7 @@ flowchart TD
 
 ---
 
-## 21. Test Evidence
+## 18. Test Evidence
 
 The repository stores the main validation evidence under:
 
@@ -808,7 +758,7 @@ Final result:
 
 ---
 
-## 22. Verification Summary
+## 19. Verification Summary
 
 | Component                      | Status |
 | ------------------------------ | ------ |
@@ -834,7 +784,7 @@ Final result:
 
 ---
 
-## 23. Repository Hygiene
+## 20. Repository Hygiene
 
 Build-generated kernel module artifacts are excluded using `.gitignore`.
 
@@ -862,7 +812,7 @@ This keeps the repository focused on source code, final binaries, reproducible r
 
 ---
 
-## 24. Reproducibility Flow
+## 21. Reproducibility Flow
 
 The project can be reproduced using the following high-level workflow:
 
@@ -912,7 +862,7 @@ Verification Logs
 
 ---
 
-## 25. Final Result
+## 22. Final Result
 
 The Embedded Linux Lab 2 implementation successfully demonstrates a complete Embedded Linux driver workflow from kernel-module development to runtime validation.
 
@@ -956,7 +906,7 @@ All major components were built, booted and validated successfully.
 
 ## Author
 
-**Hoang Trung Hai**
+**Huynh Thien Vu**
 
 **FPT University — IC Design**
 
