@@ -16,8 +16,8 @@ MODULE_VERSION("1.0");
 #define CLASS_NAME      "lab2_class"
 #define BUFFER_SIZE     1024
 #define DRIVER_MAJOR    240
-#define STUDENT_NAME    "Hoang Trung Hai"
-#define STUDENT_ID      "SS204779"
+#define STUDENT_NAME    "Huynh Thien Vu"
+#define STUDENT_ID      "SE201733"
 static int    major_number = DRIVER_MAJOR;
 static char   device_buffer[BUFFER_SIZE]; 
 static int    buffer_len = 0;
